@@ -1,1 +1,2 @@
 C:\Users\Admin\Documents\chicken\SFML tutorial part 3\part3\Debug\part3.exe
+C:\Users\Admin\Documents\code\game_tutorial_part_3\part3\Debug\part3.exe

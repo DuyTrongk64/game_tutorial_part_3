@@ -7,8 +7,12 @@ class Game
 private:
 	sf::RenderWindow* window;
 
+	//Player
+	Player* player;
+
 	//Private functions
 	void initWindow();
+	void initPlayer();
 public:
 	Game();
 	virtual ~Game();
@@ -17,6 +21,8 @@ public:
 
 	void run();
 
+	void updatePollEvents();
+	void updateInput();
 	void update();
 	void render();
 };
