@@ -10,6 +10,8 @@ void Game::initWindow()
 
 void Game::initTexture()
 {
+	this->textures["BULLET"] = new sf::Texture();
+	this->textures["BULLET"]->loadFromFile("Textures/bullet.png");
 }
 
 void Game::initPlayer()
@@ -21,12 +23,25 @@ Game::Game()
 {
 	this->initWindow();
 	this->initPlayer();
+	this->initTexture();
 }
 
 Game::~Game()
 {
 	delete this->window;
 	delete this->player;
+
+	//Delete texture
+	for (auto& i : this->textures)
+	{
+		delete i.second;
+	}
+
+	//Delete bullets
+	for (auto i : this->bullets)
+	{
+		delete i;
+	}
 }
 
 //Functions
@@ -63,6 +78,19 @@ void Game::updateInput()
 		this->player->move(0.f, -1.f);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		this->player->move(0.f, 1.f);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		this->bullets.push_back(new Bullet(this->textures["BULLET"],this->player->getPos().x, this->player->getPos().y, 0.f, 0.f, 0.f));
+	}
+}
+
+void Game::updateBullets()
+{
+	for (auto* bullet : this->bullets)
+	{
+		bullet->update();
+	}
 }
 
 void Game::update()
@@ -77,6 +105,11 @@ void Game::render()
 
 	//Draw all stuffs
 	this->player->render(*this->window);
+
+	for (auto* bullet : this->bullets)
+	{
+		bullet->render(this->window);
+	}
 
 	this->window->display();
 }

@@ -23,8 +23,11 @@ private:
 	//Private functions
 public:
 	Bullet();
-	Bullet(sf::Texture& texture, float dir_x, float dir_y, float movement_speed);
+	Bullet(sf::Texture* texture, float pos_x, float pos_y, float dir_x, float dir_y, float movement_speed);
 	virtual ~Bullet();
+
+	//Accessor
+	const sf::FloatRect getBound() const;
 
 	//Public functions
 	void update();
